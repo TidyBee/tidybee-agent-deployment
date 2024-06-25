@@ -1,8 +1,6 @@
 name: MSI
 description: Generate MSI
 
-inputs:
-outputs:
 runs:
   using: "composite"
   steps:
@@ -26,6 +24,7 @@ runs:
 
     # doc: https://wixtoolset.org/docs/tools
     - name: Install wixtoolset using choco
+      shell: pwsh
       run: choco install --force -y wixtoolset --version 3.14.0
 
     # workaround to get cargo-wix working
@@ -43,6 +42,7 @@ runs:
 
     # candle generates .wixobj files and light creates an installer from it
     - name: Run Candle and Light
+      shell: pwsh
       run: |
         mv ../keepme bootstrapper.wxs
         candle bootstrapper.wxs -o bootstrapper.wixobj
